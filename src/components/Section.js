@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Wrap = styled.div`
   width: 100%;
@@ -9,7 +9,8 @@ const Wrap = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  background-image: url("..//images/model-s.jpg");
+  background-image: ${(props) => `url("..//images/${props.bg}")`};
+  /* background-image: url("..//images/model-s.jpg"); */
   background-size: cover;
   background-position: center;
 `;
@@ -23,10 +24,14 @@ const ButtonGroup = styled.div`
   text-align: center;
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   gap: 0.4rem;
   margin-bottom: 2rem;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const LeftButton = styled.div`
@@ -44,19 +49,52 @@ const LeftButton = styled.div`
   cursor: pointer;
 `;
 
-const RightButton = styled(LeftButton)``;
+const RightButton = styled(LeftButton)`
+  background: #fff;
+  opacity: 0.65;
+  color: black;
+  font-weight: bold;
+`;
 
-const Section = () => {
+const animateArrow = keyframes`
+ 0% ,60%{
+  transform:translateY(0);
+ }
+ 50%{
+  transform:translateY(-5px);
+ }
+ 90%{
+  transform:translateY(-3px);
+ }
+`;
+
+const DownArrow = styled.img`
+  margin-top: 20px;
+  height: 40px;
+  animation: ${animateArrow} 1s ease infinite;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Section = ({ title, desc, bgImg, leftButton, rightButton }) => {
   return (
-    <Wrap>
+    <Wrap bg={bgImg}>
       <ItemText>
-        <h1>Model S</h1>
-        <p>Order Onlinbe for Touchless Delivery</p>
+        <h1>{title}</h1>
+        <p>{desc}</p>
       </ItemText>
-      <ButtonGroup>
-        <LeftButton>Custom Order</LeftButton>
-        <RightButton>Existing Inventory</RightButton>
-      </ButtonGroup>
+
+      <Buttons>
+        <ButtonGroup>
+          <LeftButton>{leftButton}</LeftButton>
+          {rightButton && <RightButton>{rightButton}</RightButton>}
+        </ButtonGroup>
+
+        <DownArrow src="..//images/down-arrow.svg" alt="arrow" />
+      </Buttons>
     </Wrap>
   );
 };
