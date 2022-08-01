@@ -1,7 +1,9 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import Fade from "react-reveal/Fade";
 
 const Wrap = styled.div`
+  z-index: -1;
   width: 100%;
   height: 100vh;
   /* background-color: orange; */
@@ -18,6 +20,7 @@ const Wrap = styled.div`
 const ItemText = styled.div`
   padding-top: 15vh;
   text-align: center;
+  z-index: -1;
 `;
 
 const ButtonGroup = styled.div`
@@ -79,19 +82,23 @@ const Buttons = styled.div`
   flex-direction: column;
 `;
 
-const Section = ({ title, desc, bgImg, leftButton, rightButton }) => {
+const Section = ({ title, desc, bgImg, leftButton, rightButton ,id}) => {
   return (
-    <Wrap bg={bgImg}>
-      <ItemText>
-        <h1>{title}</h1>
-        <p>{desc}</p>
-      </ItemText>
+    <Wrap bg={bgImg} id={id}>
+      <Fade bottom>
+        <ItemText>
+          <h1>{title}</h1>
+          <p>{desc}</p>
+        </ItemText>
+      </Fade>
 
       <Buttons>
-        <ButtonGroup>
-          <LeftButton>{leftButton}</LeftButton>
-          {rightButton && <RightButton>{rightButton}</RightButton>}
-        </ButtonGroup>
+        <Fade bottom>
+          <ButtonGroup>
+            <LeftButton>{leftButton}</LeftButton>
+            {rightButton && <RightButton>{rightButton}</RightButton>}
+          </ButtonGroup>
+        </Fade>
 
         <DownArrow src="..//images/down-arrow.svg" alt="arrow" />
       </Buttons>

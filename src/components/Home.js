@@ -11,6 +11,7 @@ const Home = () => {
         bgImg="model-s.jpg"
         leftButton="custom order"
         rightButton="existing inventory"
+        id='models'
       />
       <Section
         title="Model Y"
@@ -18,6 +19,7 @@ const Home = () => {
         bgImg="model-y.jpg"
         leftButton="custom order"
         rightButton="existing inventory"
+        id='modely'
       />
       <Section
         title="Model 3"
@@ -25,6 +27,7 @@ const Home = () => {
         bgImg="model-3.jpg"
         leftButton="custom order"
         rightButton="existing inventory"
+        id='model3'
       />
       <Section
         title="Model X"
@@ -32,6 +35,7 @@ const Home = () => {
         bgImg="model-x.jpg"
         leftButton="custom order"
         rightButton="existing inventory"
+        id='modelx'
       />
       <Section
         title="Lowest Cost Solar Panels in America"
