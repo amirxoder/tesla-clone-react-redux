@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { selectCars } from "./../redux/car/carSlice";
 
 const Container = styled.div`
   min-height: 60px;
@@ -111,6 +113,8 @@ const BurgerNav = styled.div`
 `;
 
 const Header = () => {
+  const cars = useSelector(selectCars);
+  // console.log(cars);
   const [show, setShow] = useState(false);
   const menuToggle = () => {
     setShow(!show);
@@ -135,13 +139,18 @@ const Header = () => {
         <img src="..//images/logo.svg" alt="logo" />
       </a>
       <Menu>
-        <a href="#models">Model S</a>
+        {cars.map((car, index) => (
+          <a href={`#${car.split(" ").join("").toLowerCase()}`} key={index}>
+            {car}
+          </a>
+        ))}
+        {/* <a href="#models">Model S</a>
 
         <a href="#model3">Model 3</a>
 
         <a href="#modelx">Model X</a>
 
-        <a href="#modely">Model Y</a>
+        <a href="#modely">Model Y</a> */}
       </Menu>
 
       <RigthMenu>
@@ -151,26 +160,11 @@ const Header = () => {
       </RigthMenu>
       <BurgerNav show={show}>
         <i className="bi bi-x close" onClick={() => menuToggle()}></i>
-        <li onClick={() => menuToggle()}>
-          <a href="#models" className="modelMobileshow">
-            Model S
-          </a>
-        </li>
-        <li onClick={() => menuToggle()}>
-          <a href="#model3" className="modelMobileshow">
-            Model 3
-          </a>
-        </li>
-        <li onClick={() => menuToggle()}>
-          <a href="#modelx" className="modelMobileshow">
-            Model X
-          </a>
-        </li>
-        <li onClick={() => menuToggle()}>
-          <a href="#modely" className="modelMobileshow">
-            Model Y
-          </a>
-        </li>
+        {cars.map((car, index) => (
+          <li key={index} onClick={() => menuToggle()}>
+            <a href={`#${car.split(" ").join("").toLowerCase()}`}>{car}</a>
+          </li>
+        ))}
         <li onClick={() => menuToggle()}>
           <a href="#">Existing Inventory</a>
         </li>
